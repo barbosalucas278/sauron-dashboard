@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 
-const domain = import.meta.env.VITE_AUAUTH0_DOMAINTH0_DOMAIN;
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENTID;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
