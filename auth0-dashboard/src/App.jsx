@@ -15,10 +15,7 @@ import Dashboard from './pages/Dashboard'; // I will create this page next
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
-  const domain = import.meta.env.VITE_AUTH0_DOMAIN;
-  const clientId = import.meta.env.VITE_AUTH0_CLIENTID;
-  console.log(domain);
-  console.log(clientId);
+
   
   if (isLoading) {
     return (
