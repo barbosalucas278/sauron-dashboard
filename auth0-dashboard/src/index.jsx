@@ -7,14 +7,13 @@ const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENTID;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log(import.meta.env.VITE_AUTH0_REDIRECT_URI)
 root.render(
   <React.StrictMode>
     <Auth0Provider
       domain={domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: window.location.href
+        redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI
       }}
     >
       <App />
