@@ -11,7 +11,9 @@ import Toolbar from '@mui/material/Toolbar';
 import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 import Profile from './components/Profile';
-import Dashboard from './pages/Dashboard'; // I will create this page next
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import Unauthorized from './pages/Unauthorized';
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -48,8 +50,16 @@ const App = () => {
           </Box>
         ) : (
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
           </Routes>
         )}
       </Container>
