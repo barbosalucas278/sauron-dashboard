@@ -10,7 +10,7 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
   const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
   const onRedirectCallback = (appState) => {
-    navigate(appState?.returnTo || window.location.pathname);
+    navigate(appState?.returnTo || '/', { replace: true });
   };
 
   if (!(domain && clientId && redirectUri)) {
