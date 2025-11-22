@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -16,9 +16,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
 
 const App = () => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, error } = useAuth0();
 
-  
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -27,8 +26,21 @@ const App = () => {
     );
   }
 
+  if (error) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+        <Typography variant="h5" color="error">
+          Error de autenticación
+        </Typography>
+        <Typography variant="body1">
+          {error.message}
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Router>
+    <>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -63,7 +75,7 @@ const App = () => {
           </Routes>
         )}
       </Container>
-    </Router>
+    </>
   );
 };
 
