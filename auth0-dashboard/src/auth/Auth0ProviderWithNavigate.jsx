@@ -25,6 +25,7 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
         redirect_uri: redirectUri,
       }}
       onRedirectCallback={onRedirectCallback}
+      cacheLocation="localstorage"
     >
       {children}
     </Auth0Provider>
