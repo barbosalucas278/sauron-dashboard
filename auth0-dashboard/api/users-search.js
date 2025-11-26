@@ -32,8 +32,9 @@ export default async function handler(request, response) {
             return response.status(500).json({ error: 'Failed to retrieve management token' });
         }
 
-        // Construct a Lucene query for better results (partial match on name, email, nickname)
-        const searchQuery = `name:"*${q}*" OR email:"*${q}*" OR nickname:"*${q}*"`;
+        // Construct a Lucene query for better results (partial match on name, email, nickname, user_id, app_metadata)
+        // Note: Wildcards (*) do not work inside quotes in Lucene.
+        const searchQuery = `name:*${q}* OR email:*${q}* OR nickname:*${q}* OR user_id:*${q}* OR app_metadata:*${q}*`;
 
         // Search users in Auth0 Management API
         // search_engine: v3 is recommended

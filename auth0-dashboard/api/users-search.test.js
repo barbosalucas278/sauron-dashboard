@@ -16,9 +16,10 @@ describe('API: users-search', () => {
         vi.clearAllMocks();
         req = { query: {} };
         res = {
-            status: vi.fn().mockReturnThis(),
+            status: vi.fn(),
             json: vi.fn(),
         };
+        res.status.mockReturnValue(res);
     });
 
     it('returns 400 if query (q) is missing', async () => {
@@ -29,9 +30,9 @@ describe('API: users-search', () => {
 
     it('returns 500 if management token cannot be retrieved', async () => {
         req.query.q = 'test';
-        // Mock token response failure or empty
+        // Mock token response failure or empty (no access_token)
         global.fetch.mockResolvedValueOnce({
-            json: async () => ({}), // No access_token
+            json: async () => ({}),
         });
 
         await handler(req, res);
@@ -53,6 +54,7 @@ describe('API: users-search', () => {
         global.fetch.mockResolvedValueOnce({
             ok: true,
             json: async () => mockUsers,
+            status: 200
         });
 
         await handler(req, res);
@@ -60,8 +62,8 @@ describe('API: users-search', () => {
         // Verify token call
         expect(global.fetch).toHaveBeenNthCalledWith(1, `https://${process.env.AUTH0_DOMAIN}/oauth/token`, expect.any(Object));
 
-        // Verify search call with constructed query
-        const expectedQuery = encodeURIComponent('name:"*lucas*" OR email:"*lucas*" OR nickname:"*lucas*"');
+        // Verify search call with constructed query including user_id and app_metadata
+        const expectedQuery = encodeURIComponent('name:*lucas* OR email:*lucas* OR nickname:*lucas* OR user_id:*lucas* OR app_metadata:*lucas*');
         expect(global.fetch).toHaveBeenNthCalledWith(2,
             `https://${process.env.AUTH0_DOMAIN}/api/v2/users?q=${expectedQuery}&search_engine=v3`,
             { headers: { authorization: `Bearer ${mockToken}` } }
