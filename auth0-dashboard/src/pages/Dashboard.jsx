@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 
 import Profile from '../components/Profile';
+import UserSearch from '../components/UserSearch';
 
 // Component to fetch and display user action history
 const UserActions = ({ userId }) => {
@@ -138,6 +139,7 @@ const Dashboard = () => {
         <Profile />
       </Grid>
       <Grid item xs={12} md={8}>
+        <UserSearch />
         <UserActions userId={userId} />
         <LinkedAccounts userId={userId} />
       </Grid>
