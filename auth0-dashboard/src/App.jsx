@@ -44,7 +44,7 @@ const App = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Auth0 Dashboard
+            Auth0 Dashboard (v1.1)
           </Typography>
           {isAuthenticated && <LogoutButton />}
         </Toolbar>
