@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 
-const domain = import.meta.env.VITE_AUTH0_DOMAIN;
-const clientId = import.meta.env.VITE_AUTH0_CLIENTID;
+const domain = "lunabe.us.auth0.com";
+const clientId = "KlP5Y0kxDOGxoWdaIXgzluI2CeJP0gu5";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
